@@ -1,0 +1,19 @@
+body {
+  padding: 5px;
+  font:  "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 100%;
+}
+
+a {
+  color: #00B7FF;
+}
+h1{
+  color:green;
+  background: yellow;
+}
+p{
+  color: maroon ;
+}
+.word-break {
+  word-wrap: break-word;
+}
