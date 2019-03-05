@@ -10,29 +10,10 @@ const mongooseUnique = require('mongoose-unique-validator');
 const routerRegister = require('./routes/register.js');
 const routerUsers = require('./routes/users');
 
-app.listen(port,()=>console.log( `server running at posr ${port}` ));
+app.listen(port,()=>console.log( `server running at port ${port}` ));
 mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true,useCreateIndex: true})
 .then(value=>console.log( 'connected to mongodb' ) )
 .catch(err=>console.log( 'error',err ));
-
-// var Users = new mongoose.model('users2');
-// var user1=new usersCollection({
-//     name: 'john1',
-//     age: 30,
-//     tags: ['javascript','mongodb','css']
-// });
-// user1.save().then( data=>{
-//   console.log( data );
-// });
-// (async function myAsync() {
-//   var a = await usersCollection.find();
-//   console.log( a );
-// }());
-
-// usersCollection.find({name:'john2'}).then(data=>console.log( data ));
-
-
-// var a = usersCollection
 
 
 app.use(express.json());

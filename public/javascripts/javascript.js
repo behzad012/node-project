@@ -17,7 +17,8 @@ $(function(){
 function ajaxGet1(){
     var settings = {
         "url": "http://localhost/api/filmlist/"+$( '#txt1' ).val().toLowerCase().trim(),
-        "method": "GET"
+        "method": "GET",
+        timeout: 20000
       };
       $.ajax(settings).done(function (data) {
         $( '#response' ).append($('<p>'+JSON.stringify(data)+'</p>'));
@@ -29,7 +30,8 @@ function ajaxGet1(){
 function ajaxGetQuery(){
   var settings={
     method: 'get',
-    url: 'http://localhost/api/films/'
+    url: 'http://localhost/api/films/',
+    timeout: 20000
     // data: { name: $( '#txt2' ).val() }
   };
   $.ajax(settings).done(function(data){
@@ -58,7 +60,8 @@ function ajaxgetmembers(){
     data: {
       // "id":$( '#txt1' ).val(),
       "name":$( '#txt1' ).val().toLowerCase().trim()
-    }
+    },
+    timeout: 20000
     // data: '{"id":'+JSON.stringify( $( '#txt1' ).val() )+',"name":'+JSON.stringify( $( '#txt2' ).val() )+'}'
   };
   $.ajax(settings).done(function(data){
@@ -80,7 +83,8 @@ function ajaxGetQuery2(){
   var settings={
     method: 'post',
     url: 'http://localhost/api/',
-    data: {"name": $( '#txt2' ).val().toLowerCase().trim()}
+    data: {"name": $( '#txt2' ).val().toLowerCase().trim()},
+    timeout: 20000
   };
   $.ajax(settings).done(function(data){
     var $table=$( '<table class="table table-striped"/>' ).append($('<tbody/>'));

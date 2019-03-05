@@ -92,14 +92,13 @@ router.post('/register/',(req,res)=>{
 router.get('/register/',(req,res)=>{
   userRegisterCollection.find({'name':req.query.name})
   .then(data=>{
-    console.log( data );
     if(data.length>0){
-      var newarray =[];
+      var newArray =[];
       data.forEach((value,i)=>{
-        newarray.push( _.pick(value,['name','email','password','date']) );
+        newArray.push( _.pick(value,['name','email','password','date']) );
       });
-      res.send(newarray);
-      console.log( newarray );
+      res.send(newArray);
+      console.log( newArray );
     }else{
       res.status(400).send('not found!!')
     }
