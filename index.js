@@ -9,6 +9,7 @@ const mock = require('./mock.json');
 const mongooseUnique = require('mongoose-unique-validator');
 const routerRegister = require('./routes/register.js');
 const routerUsers = require('./routes/users');
+const routerGetPhotos = require('./routes/getphotos');
 
 app.listen(port,()=>console.log( `server running at port ${port}` ));
 mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true,useCreateIndex: true})
@@ -19,6 +20,6 @@ mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true,useCre
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname,'/public')));
-app.use('/api/',routerRegister);
-// app.use('/api/',routerUsers);
+app.use('/api/', routerRegister);
+app.use('/api/getphotos', routerGetPhotos);
 
