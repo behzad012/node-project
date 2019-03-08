@@ -13,6 +13,8 @@ $(function(){
     });
     $( '#register' ).click(register);
     $( '#btn4' ).click(getPhotos);
+
+    // $( '#formRegister' ).click(formRegister);
 });
 
 function ajaxGet1(){
@@ -174,3 +176,5 @@ function getPhotos(){
     $( '#responsePhoto' ).append( $( '<p/>' ).append(err.responseText) )
   });
 }
+
+
