@@ -141,7 +141,7 @@ router.post('/search/',(req,res)=>{
   usersCollection.findOne({'email':req.body.email},{_id:false})
   .then(data=>{
     if(data){
-      res.send(data);
+      res.send(_.pick(data,['name','password','email','created_at','updated_at']));
     }else{
       res.status(400).send('not found!!')
     }

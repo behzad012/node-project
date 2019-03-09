@@ -156,7 +156,6 @@ function registerForm(e){
       timeout: 10000
     };
     $.ajax(settings).done(function(data){
-      console.log('done', data );
       $( '#searchResult' ).css('opacity','1');
       try{
         var $table=$( '<table class="table table-striped"/>' ).append($('<tbody/>'));
@@ -169,11 +168,7 @@ function registerForm(e){
       }
     }).fail(function(err){
       $( '#searchResult' ).css('opacity','1');
-      var $table=$( '<table class="table table-striped"/>' ).append($('<tbody/>'));
-      $.each(err,function(i,value){
-        $table.append( $( '<tr/>' ).append('<td>'+i+'</td>'+'<td>'+value+'</td>') )
-      });
-        $( 'div#searchResult' ).html( '<h3 class="text-danger">خطا </h3>' ).append($table);
+      $( 'div#searchResult' ).html( '<h3 class="text-danger">خطا </h3>' ).append('<p class="text-danger">آدرس ایمیل نامعتبر است </p>');
     });
   }
   
@@ -190,11 +185,9 @@ function registerForm(e){
       timeout: 10000
     };
     $.ajax(settings).done(function(data){
-      console.log( 'fron data: ',data );
       $( '#deleteResult' ).css('opacity','1');
       $( 'div#deleteResult' ).html( '<p class="text-primary">حذف با موفقیت انجام شد</p><p>'+$( '#txtdelete' ).val().toLowerCase().trim()+'</p>' );
     }).fail(function(err){
-      console.log( 'fron err: ',err );
       $( '#deleteResult' ).css('opacity','1');
       $( 'div#deleteResult' ).html( '<h3 class="text-danger">خطا </h3>' ).append('<p class="text-danger">آدرس ایمیل نامعتبر است </p>');
     });
