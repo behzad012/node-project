@@ -83,16 +83,21 @@ router.post('/register/',(req,res)=>{
 
 
 router.get('/register/',(req,res)=>{
-  // var newUser=new userRegisterCollection({
-  //   name: req.body.name,
-  //   password: req.body.password,
-  //   email: req.body.email
-  // });
-  var newUser=new usersCollection(_.pick(req.body,['name','password','email']));
-  newUser.save().then(data=>{
-      res.send(_.pick(data,['name','email','password','date']));
-  }).catch(err=>{
-    res.status(400).send(err);
+  usersCollection.findOne({'email':req.query.email},{_id:false})
+  .then(data=>{
+    if(data){
+      var myarray = [];
+      var items= _.pick(data,['name','email','password','date']);
+      console.log( typeof(items) );
+      console.log( items );
+      items.forEach(element => {
+        console.log( 'element: ',element );
+      });
+      // console.log( _.pick(data,['name','email','password','date']) );
+      res.send(data);
+    }else{
+      res.status(400).send('not found!!')
+    }
   });
   
 });
@@ -133,10 +138,8 @@ router.delete('/register/',(req,res)=>{
 router.post('/search/',(req,res)=>{
   usersCollection.findOne({'email':req.body.email},{_id:false})
   .then(data=>{
-    console.log( typeof(data) );
     console.log( data );
     if(data){
-      console.log( _.pick(data,['name','email','password','date']) );
       res.send(data);
     }else{
       res.status(400).send('not found!!')

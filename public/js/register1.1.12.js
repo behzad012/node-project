@@ -82,14 +82,22 @@ function registerForm(e){
       $( '#searchinfo' ).css('opacity','1');
       $( '#userinfo' ).css('display','block');
       $( 'div#searchinfo' ).html( '<p class="text-primary"> جستجو با موفقیت انجام شد</p>' );
-      
-      $.each(JSON.parse(data.toString()),function(i,value){
-        $( '#txtupdate'+i ).val(value.toString());
+      try{
+        var $table=$( '<table class="table table-striped"/>' ).append($('<tbody/>'));
+        $.each(data,function(i,value){
+          $( '#txtupdate'+i ).val(value.toString());
+        });
+      }catch{
+        $( 'div#searchResult' ).html(JSON.stringify(data));
+      }
+      }).fail(function(err){
+        $( '#searchinfo' ).css('opacity','1');
+        var $table=$( '<table class="table table-striped"/>' ).append($('<tbody/>'));
+        $.each(err,function(i,value){
+          $table.append( $( '<tr/>' ).append('<td>'+i+'</td>'+'<td>'+value+'</td>') )
+        });
+        $( 'div#searchinfo' ).html( '<h3 class="text-danger">خطا </h3>' ).append('<p class="text-danger">آدرس ایمیل نامعتبر است </p>').append($table);
       });
-    }).fail(function(err){;
-      $( '#searchinfo' ).css('opacity','1');
-      $( 'div#searchinfo' ).html( '<h3 class="text-danger">خطا </h3>' ).append('<p class="text-danger">آدرس ایمیل نامعتبر است </p>');
-    });
   }
 
 
@@ -160,7 +168,7 @@ function registerForm(e){
         $table.append( $( '<tr/>' ).append('<td>'+i+'</td>'+'<td>'+value+'</td>') )
       });
         $( 'div#searchResult' ).html( '<h3 class="text-danger">خطا </h3>' ).append($table);
-      });
+    });
   }
   
   
