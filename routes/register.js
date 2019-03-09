@@ -30,7 +30,8 @@ var userRegisterSchema = new mongoose.Schema({
     unique: true,
     index: true,
     required: true
-  }
+  },
+  tags: [String]
 }); 
 
 
@@ -110,39 +111,35 @@ router.put('/register/', function(req, res) {
     $currentDate: {
       updated_at: true
     }
-  },(err)=>{
-    if(err){
-      console.log( 'err',err );
-      res.status(400).send(err);
-    }else{
-      usersCollection.findOne({'email':req.body.email},{_id:false})
-      .then(data=>{
-        res.send(_.pick(data,['name','password','email','created_at','updated_at']));
-      });
-    }
-  });
-});
-
-router.delete('/register/',(req,res)=>{
-  // var newUser=new userRegisterCollection({
-  //   name: req.body.name,
-  //   password: req.body.password,
-  //   email: req.body.email
-  // });
-  var newUser=new usersCollection(_.pick(req.body,['name','password','email']));
-  newUser.save().then(data=>{
-      res.send(_.pick(data,['name','email','password','date']));
+  }).then(data=>{
+    usersCollection.findOne({'email':req.body.email},{_id:false})
+    .then(data=>{
+      res.send(_.pick(data,['name','password','email','created_at','updated_at']));
+    });
   }).catch(err=>{
     res.status(400).send(err);
   });
-  
+});
+
+
+
+router.delete('/register/',(req,res)=>{
+  usersCollection.deleteOne({email:req.body.email})
+  .then(data=>{
+    if(data.n){
+      res.send('ok');
+    }else{
+      res.status(400).send(err);
+    }
+  }).catch(err=>{
+    res.status(400).send(err);
+  })
 });
 
 
 router.post('/search/',(req,res)=>{
   usersCollection.findOne({'email':req.body.email},{_id:false})
   .then(data=>{
-    console.log( data );
     if(data){
       res.send(data);
     }else{
@@ -154,3 +151,5 @@ router.post('/search/',(req,res)=>{
 
 
 module.exports = router;
+
+

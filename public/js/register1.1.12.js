@@ -190,10 +190,11 @@ function registerForm(e){
       timeout: 10000
     };
     $.ajax(settings).done(function(data){
+      console.log( 'fron data: ',data );
       $( '#deleteResult' ).css('opacity','1');
-      console.log( 'deleteForm',data );
-      $( 'div#deleteResult' ).html( '<p class="text-primary">حذف با موفقیت انجام شد</p>' );
+      $( 'div#deleteResult' ).html( '<p class="text-primary">حذف با موفقیت انجام شد</p><p>'+$( '#txtdelete' ).val().toLowerCase().trim()+'</p>' );
     }).fail(function(err){
+      console.log( 'fron err: ',err );
       $( '#deleteResult' ).css('opacity','1');
       $( 'div#deleteResult' ).html( '<h3 class="text-danger">خطا </h3>' ).append('<p class="text-danger">آدرس ایمیل نامعتبر است </p>');
     });
