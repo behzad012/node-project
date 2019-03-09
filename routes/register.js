@@ -24,18 +24,9 @@ var userRegisterSchema = new mongoose.Schema({
   }
 }); 
 
-var MyUser = new mongoose.Schema({
-  name:  {type:String,required:true},
-  id: Number,
-  body:   String,
-  date: { type: Date, default: Date.now },
-  age: Number,
-  tags: [String],
-});
 
 userRegisterSchema.plugin(mongooseUnique);
-var userRegisterCollection = mongoose.model('registers',userRegisterSchema);
-var usersCollection = mongoose.model('users',MyUser);
+var usersCollection = mongoose.model('users',userRegisterSchema);
 
 // userRegisterCollection.find({'name':'jafi'}).then(data=>{
 //   console.log( data );
@@ -80,7 +71,7 @@ router.post('/register/',(req,res)=>{
   //   password: req.body.password,
   //   email: req.body.email
   // });
-  var newUser=new userRegisterCollection(_.pick(req.body,['name','password','email']));
+  var newUser=new usersCollection(_.pick(req.body,['name','password','email']));
   newUser.save().then(data=>{
       res.send(_.pick(data,['name','email','password','date']));
   }).catch(err=>{
@@ -97,7 +88,7 @@ router.get('/register/',(req,res)=>{
   //   password: req.body.password,
   //   email: req.body.email
   // });
-  var newUser=new userRegisterCollection(_.pick(req.body,['name','password','email']));
+  var newUser=new usersCollection(_.pick(req.body,['name','password','email']));
   newUser.save().then(data=>{
       res.send(_.pick(data,['name','email','password','date']));
   }).catch(err=>{
@@ -129,7 +120,7 @@ router.delete('/register/',(req,res)=>{
   //   password: req.body.password,
   //   email: req.body.email
   // });
-  var newUser=new userRegisterCollection(_.pick(req.body,['name','password','email']));
+  var newUser=new usersCollection(_.pick(req.body,['name','password','email']));
   newUser.save().then(data=>{
       res.send(_.pick(data,['name','email','password','date']));
   }).catch(err=>{
@@ -140,19 +131,23 @@ router.delete('/register/',(req,res)=>{
 
 
 router.post('/search/',(req,res)=>{
-  userRegisterCollection.find({'name':req.query.name})
+  // usersCollection.findOne({'name':req.body.name},{_id:false})
+  // .then(data=>{
+  //   console.log( typeof(data) );
+  //   console.log( data );
+  //   if(data){
+  //     console.log( _.pick(data,['name','email','password']) );
+  //     res.send(data);
+  //   }else{
+  //     res.status(400).send('not found!!')
+  //   }
+  // });
+  usersCollection.find({})
   .then(data=>{
-    if(data.length>0){
-      var newArray =[];
-      data.forEach((value,i)=>{
-        newArray.push( _.pick(value,['name','email','password','date']) );
-      });
-      res.send(newArray);
-      console.log( newArray );
-    }else{
-      res.status(400).send('not found!!')
-    }
+    console.log( typeof(data) );
+    console.log( data );
   });
+
 });
 
 

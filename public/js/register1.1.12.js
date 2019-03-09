@@ -27,7 +27,7 @@ function registerForm(e){
       $( '#registerinfo' ).css('opacity','1');
       try{
         var $table=$( '<table class="table table-striped"/>' ).append($('<tbody/>'));
-        $.each(JSON.parse(data.toString()),function(i,value){
+        $.each(data,function(i,value){
           $table.append( $( '<tr/>' ).append('<td>'+i+'</td>'+'<td>'+value+'</td>') )
         });
         $( 'div#registerinfo' ).html( '<p class="text-primary">ثبت نام با موفقیت انجام شد</p><h3 class=""> مشخصات کاربر</h3>' ).append($table);
@@ -37,13 +37,11 @@ function registerForm(e){
     }).fail(function(err){
       $( '#registerinfo' ).css('opacity','1');
       var $table=$( '<table class="table table-striped"/>' ).append($('<tbody/>'));
-        $.each(err,function(i,value){
-          if(i==='responseText'){
-            $table.append( $( '<tr/>' ).append('<td>'+value+'</td>') );
-          }
-        });
-      $( 'div#registerinfo' ).html( '<h3 class="text-danger">خطا </h3>' ).append($table);
-    });
+      $.each(err,function(i,value){
+        $table.append( $( '<tr/>' ).append('<td>'+i+'</td>'+'<td>'+value+'</td>') )
+      });
+        $( 'div#registerinfo' ).html( '<h3 class="text-danger">خطا </h3>' ).append($table);
+      });
   }
   
   
@@ -144,6 +142,7 @@ function registerForm(e){
       timeout: 10000
     };
     $.ajax(settings).done(function(data){
+      
       $( '#searchResult' ).css('opacity','1');
       try{
         var $table=$( '<table class="table table-striped"/>' ).append($('<tbody/>'));
@@ -155,6 +154,7 @@ function registerForm(e){
         $( 'div#searchResult' ).html(JSON.stringify(data));
       }
     }).fail(function(err){
+      console.log( err );
       $( '#searchResult' ).css('opacity','1');
       $( 'div#searchResult' ).html( '<h3 class="text-danger">خطا </h3>' ).append('<p class="text-danger">آدرس ایمیل نامعتبر است </p>');
     });
