@@ -90,9 +90,9 @@ router.get('/register/',(req,res)=>{
       var items= _.pick(data,['name','email','password','date']);
       console.log( typeof(items) );
       console.log( items );
-      items.forEach(element => {
-        console.log( 'element: ',element );
-      });
+      // items.forEach(element => {
+      //   console.log( 'element: ',element );
+      // });
       // console.log( _.pick(data,['name','email','password','date']) );
       res.send(data);
     }else{
