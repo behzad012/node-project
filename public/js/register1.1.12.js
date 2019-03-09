@@ -38,7 +38,11 @@ function registerForm(e){
       $( '#registerinfo' ).css('opacity','1');
       var $table=$( '<table class="table table-striped"/>' ).append($('<tbody/>'));
       $.each(err,function(i,value){
-        $table.append( $( '<tr/>' ).append('<td>'+i+'</td>'+'<td>'+value+'</td>') )
+        if (typeof(value)=='object') {
+          $.each(value.errors,function(i,v){
+            $table.append( $( '<tr/>' ).append('<td>'+v.message+'</td>') )
+          });
+        }
       });
         $( 'div#registerinfo' ).html( '<h3 class="text-danger">خطا </h3>' ).append($table);
       });

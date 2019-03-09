@@ -23,3 +23,19 @@ app.use(express.static(path.join(__dirname,'/public')));
 app.use('/api/', routerRegister);
 app.use('/api/getphotos', routerGetPhotos);
 
+
+
+// const fruits = {
+//     apple: 28,
+//     orange: 17,
+//     pear: 54,
+//   }
+//   let keys = Object.keys(fruits);
+//   console.log( 'keys: ',keys );
+//   console.log( '---------' );        
+//   let values = Object.values(fruits)
+//   console.log( 'values: ',values );
+//   console.log( '---------' ); 
+//   let enteries = Object.entries(fruits);
+//   console.log( 'enteries: ',enteries );
+//   console.log( '---------' ); 

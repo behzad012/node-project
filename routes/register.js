@@ -9,12 +9,21 @@ var userRegisterSchema = new mongoose.Schema({
   name:  {
     type:String,
     required:true,
-    index: true
+    index: true,
+    required: true
   },
-  id: Number,
-  password:   String,
-  date: { type: Date, default: Date.now },
-  age: Number,
+  password:  {
+    type:String,
+    required: true
+  },
+  created_at: {
+    type: Date, 
+    default: Date.now
+  },
+  updated_at: {
+    type: Date, 
+    default: Date.now
+  },
   email: {
     type: String,
     lowercase: true,
@@ -73,7 +82,7 @@ router.post('/register/',(req,res)=>{
   // });
   var newUser=new usersCollection(_.pick(req.body,['name','password','email']));
   newUser.save().then(data=>{
-      res.send(_.pick(data,['name','email','password','date']));
+      res.send(_.pick(data,['name','password','email','date','created_at','updated_at']));
   }).catch(err=>{
     res.status(400).send(err);
   });
@@ -86,15 +95,8 @@ router.get('/register/',(req,res)=>{
   usersCollection.findOne({'email':req.query.email},{_id:false})
   .then(data=>{
     if(data){
-      var myarray = [];
-      var items= _.pick(data,['name','email','password','date']);
-      console.log( typeof(items) );
-      console.log( items );
-      // items.forEach(element => {
-      //   console.log( 'element: ',element );
-      // });
-      // console.log( _.pick(data,['name','email','password','date']) );
-      res.send(data);
+      var items= _.pick(data,['name','password','email']);
+      res.send( Object.values(items) );
     }else{
       res.status(400).send('not found!!')
     }
@@ -107,7 +109,7 @@ router.put('/register/', function(req, res) {
   .then(data=>{
     console.log( typeof(data) );
     if(data){
-      console.log( _.pick(data,['name','email','password']) );
+      console.log( _.pick(data,['name','email','password','created_at','updated_at']) );
       res.send(data);
     }else{
       res.status(400).send('not found!!')
