@@ -131,23 +131,17 @@ router.delete('/register/',(req,res)=>{
 
 
 router.post('/search/',(req,res)=>{
-  // usersCollection.findOne({'name':req.body.name},{_id:false})
-  // .then(data=>{
-  //   console.log( typeof(data) );
-  //   console.log( data );
-  //   if(data){
-  //     console.log( _.pick(data,['name','email','password']) );
-  //     res.send(data);
-  //   }else{
-  //     res.status(400).send('not found!!')
-  //   }
-  // });
-  usersCollection.find({})
+  usersCollection.findOne({'email':req.body.email},{_id:false})
   .then(data=>{
     console.log( typeof(data) );
     console.log( data );
+    if(data){
+      console.log( _.pick(data,['name','email','password','date']) );
+      res.send(data);
+    }else{
+      res.status(400).send('not found!!')
+    }
   });
-
 });
 
 

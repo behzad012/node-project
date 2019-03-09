@@ -142,22 +142,25 @@ function registerForm(e){
       timeout: 10000
     };
     $.ajax(settings).done(function(data){
-      
+      console.log('done', data );
       $( '#searchResult' ).css('opacity','1');
       try{
         var $table=$( '<table class="table table-striped"/>' ).append($('<tbody/>'));
-        $.each(JSON.parse(data.toString()),function(i,value){
+        $.each(data,function(i,value){
           $table.append( $( '<tr/>' ).append('<td>'+i+'</td>'+'<td>'+value+'</td>') )
         });
-        $( 'div#searchResult' ).html( '<p class="text-primary">جستجو با موفقیت انجام شد</p><h3 class=""> مشخصات کاربر</h3>' ).append($table);
+        $( 'div#searchResult' ).html( '<p class="text-primary"> جستجو با موفقیت انجام شد</p><h3 class=""> مشخصات کاربر</h3>' ).append($table);
       }catch{
         $( 'div#searchResult' ).html(JSON.stringify(data));
       }
     }).fail(function(err){
-      console.log( err );
       $( '#searchResult' ).css('opacity','1');
-      $( 'div#searchResult' ).html( '<h3 class="text-danger">خطا </h3>' ).append('<p class="text-danger">آدرس ایمیل نامعتبر است </p>');
-    });
+      var $table=$( '<table class="table table-striped"/>' ).append($('<tbody/>'));
+      $.each(err,function(i,value){
+        $table.append( $( '<tr/>' ).append('<td>'+i+'</td>'+'<td>'+value+'</td>') )
+      });
+        $( 'div#searchResult' ).html( '<h3 class="text-danger">خطا </h3>' ).append($table);
+      });
   }
   
   
