@@ -101,24 +101,26 @@ router.get('/register/',(req,res)=>{
       res.status(400).send('not found!!')
     }
   });
-  
 });
 
 router.put('/register/', function(req, res) {
-  usersCollection.findOne({'name':req.body.name},{_id:false})
-  .then(data=>{
-    console.log( typeof(data) );
-    if(data){
-      console.log( _.pick(data,['name','email','password','created_at','updated_at']) );
-      res.send(data);
+  usersCollection.updateOne({email:req.body.email},{
+    name:req.body.name,
+    password: req.body.password,
+    $currentDate: {
+      updated_at: true
+    }
+  },(err)=>{
+    if(err){
+      console.log( 'err',err );
+      res.status(400).send(err);
     }else{
-      res.status(400).send('not found!!')
+      usersCollection.findOne({'email':req.body.email},{_id:false})
+      .then(data=>{
+        res.send(_.pick(data,['name','password','email','created_at','updated_at']));
+      });
     }
   });
-  // usersCollection.update({name:'jafi'},{name:'jafii'},(err,raw)=>{
-  //   console.log( 'err',err );
-  //   console.log( 'raw',raw );
-  // });
 });
 
 router.delete('/register/',(req,res)=>{

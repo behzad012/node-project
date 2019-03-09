@@ -35,15 +35,15 @@ function registerForm(e){
         $( 'div#registerinfo' ).html(JSON.stringify(data));
       }
     }).fail(function(err){
-      $( '#registerinfo' ).css('opacity','1');
-      var $table=$( '<table class="table table-striped"/>' ).append($('<tbody/>'));
-      $.each(err,function(i,value){
-        if (typeof(value)=='object') {
-          $.each(value.errors,function(i,v){
-            $table.append( $( '<tr/>' ).append('<td>'+v.message+'</td>') )
-          });
-        }
-      });
+        $( '#registerinfo' ).css('opacity','1');
+        var $table=$( '<table class="table table-striped"/>' ).append($('<tbody/>'));
+        $.each(err,function(i,value){
+          if (typeof(value)=='object') {
+            $.each(value.errors,function(i,v){
+              $table.append( $( '<tr/>' ).append('<td>'+v.message+'</td>') )
+            });
+          }
+        });
         $( 'div#registerinfo' ).html( '<h3 class="text-danger">خطا </h3>' ).append($table);
       });
   }
@@ -122,7 +122,7 @@ function registerForm(e){
       $( '#updateinfo' ).css('opacity','1');
       try{
         var $table=$( '<table class="table table-striped"/>' ).append($('<tbody/>'));
-        $.each(JSON.parse(data.toString()),function(i,value){
+        $.each(data,function(i,value){
           $table.append( $( '<tr/>' ).append('<td>'+i+'</td>'+'<td>'+value+'</td>') )
         });
         $( 'div#updateinfo' ).html( '<p class="text-primary">بروزرسانی با موفقیت انجام شد</p><h3 class=""> مشخصات کاربر</h3>' ).append($table);
@@ -130,16 +130,18 @@ function registerForm(e){
         $( 'div#updateinfo' ).html(JSON.stringify(data));
       }
     }).fail(function(err){
-      $( '#updateinfo' ).css('display','block');
-      $( '#updateinfo' ).css('opacity','1');
+        $( '#updateinfo' ).css('display','block');
+        $( '#updateinfo' ).css('opacity','1');
         var $table=$( '<table class="table table-striped"/>' ).append($('<tbody/>'));
         $.each(err,function(i,value){
-          if(i==='responseText'){
-            $table.append( $( '<tr/>' ).append('<td>'+value+'</td>') );
+          if (typeof(value)=='object') {
+            $.each(value.errors,function(i,v){
+              $table.append( $( '<tr/>' ).append('<td>'+v.message+'</td>') )
+            });
           }
         });
-      $( 'div#updateinfo' ).html( '<h3 class="text-danger">خطا </h3>' ).append($table);
-    });
+        $( 'div#updateinfo' ).html( '<h3 class="text-danger">خطا </h3>' ).append($table);
+     });
   }
 
 
