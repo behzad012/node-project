@@ -63,10 +63,13 @@ ol, ul {
 
 nav.flexmenu{padding: 5px 0px 0px 0px;  position: absolute;top: 0; background-color:rgba(0,0,0,.3);color:white; width: 100vw;z-index: 99;}
 nav.flexmenu>ul{display: flex; position: relative;margin: 0px;list-style: none;}
-nav.flexmenu>ul>li>a{width: auto; padding: 10px 15px 15px;border-radius: 5px;font-size: 1.07em;display: block;color: white;}
-nav.flexmenu ul li a:hover{text-shadow: -4px 4px 10px black; }
-nav.flexmenu ul li:hover{background-color: rgba(0,0,0,0.2);border-radius: 5px;}
 
+nav.flexmenu ul li a{padding: 10px 15px; color: white;  display:block; width: 110px; }
+nav.flexmenu>ul>li>a{width: auto; padding: 10px 15px 15px;border-radius: 5px;font-size: 1.07em;display: block;color: white;}
+/* nav.flexmenu ul li a:hover{text-shadow: -4px 4px 8px black; } */
+nav.flexmenu ul li:hover{background-color: rgba(0,0,0,0.2);border-radius: 5px;}
+nav.flexmenu ul ul{display: none;margin: 0; padding: 0;}
+nav.flexmenu ul>li:hover>ul{display: block;position: absolute; background-color:rgba(0,0,0,.5); top:100%;}
 
 .cover{
 	object-fit: cover;

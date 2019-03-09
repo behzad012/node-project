@@ -15,12 +15,11 @@ function registerForm(e){
     e.preventDefault();
     var settings={
       method: 'post' ,
-      url: '/register.php' ,
+      url: '/api/register/' ,
       data: {
         name: $( '#txtRegister1' ).val().toLowerCase().trim(),
         password: $( '#txtRegister2' ).val().trim(),
-        email: $( '#txtRegister3' ).val().toLowerCase().trim(),
-        register: 'register'
+        email: $( '#txtRegister3' ).val().toLowerCase().trim()
       },
       timeout: 10000
     };
@@ -74,11 +73,10 @@ function registerForm(e){
     $( '#userinfo' ).css('display','none');
     $( '#updateinfo' ).css('display','none');
     var settings={
-      method: 'post' ,
-      url: '/register.php' ,
+      method: 'get' ,
+      url: '/api/register/' ,
       data: {
-        email: $( '#txtupdate' ).val().toLowerCase().trim(),
-        search: 'search'
+        email: $( '#txtupdate' ).val().toLowerCase().trim()
       },
       timeout: 10000
     };
@@ -100,13 +98,12 @@ function registerForm(e){
   function updateForm(){
     $( '#updateinfo' ).css('opacity','.3');
     var settings={
-      method: 'post' ,
-      url: '/register.php' ,
+      method: 'PUT' ,
+      url: '/api/register/' ,
       data: {
         name: $( '#txtupdate0' ).val().toLowerCase().trim(),
         password: $( '#txtupdate1' ).val().trim(),
-        email: $( '#txtupdate2' ).val().toLowerCase().trim(),
-        update: 'update'
+        email: $( '#txtupdate2' ).val().toLowerCase().trim()
       },
       timeout: 10000
     };
@@ -140,10 +137,9 @@ function registerForm(e){
     $( '#searchResult' ).css('opacity','.3');
     var settings={
       method: 'post' ,
-      url: '/register.php' ,
+      url: '/api/search/' ,
       data: {
-        email: $( '#txtsearch' ).val().toLowerCase().trim(),
-        searchresult: 'searchresult'
+        email: $( '#txtsearch' ).val().toLowerCase().trim()
       },
       timeout: 10000
     };
@@ -169,11 +165,10 @@ function registerForm(e){
   function deleteForm(){
     $( '#deleteResult' ).css('opacity','.2');
     var settings={
-      method: 'post' ,
-      url: '/register.php' ,
+      method: 'DELETE' ,
+      url: '/api/register/' ,
       data: {
-        email: $( '#txtdelete' ).val().toLowerCase().trim(),
-        delete: 'delete'
+        email: $( '#txtdelete' ).val().toLowerCase().trim()
       },
       timeout: 10000
     };
@@ -186,3 +181,6 @@ function registerForm(e){
       $( 'div#deleteResult' ).html( '<h3 class="text-danger">خطا </h3>' ).append('<p class="text-danger">آدرس ایمیل نامعتبر است </p>');
     });
   }
+
+
+  

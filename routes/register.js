@@ -89,7 +89,57 @@ router.post('/register/',(req,res)=>{
   
 });
 
+
+
 router.get('/register/',(req,res)=>{
+  // var newUser=new userRegisterCollection({
+  //   name: req.body.name,
+  //   password: req.body.password,
+  //   email: req.body.email
+  // });
+  var newUser=new userRegisterCollection(_.pick(req.body,['name','password','email']));
+  newUser.save().then(data=>{
+      res.send(_.pick(data,['name','email','password','date']));
+  }).catch(err=>{
+    res.status(400).send(err);
+  });
+  
+});
+
+router.put('/register/', function(req, res) {
+  usersCollection.findOne({'name':req.body.name},{_id:false})
+  .then(data=>{
+    console.log( typeof(data) );
+    if(data){
+      console.log( _.pick(data,['name','email','password']) );
+      res.send(data);
+    }else{
+      res.status(400).send('not found!!')
+    }
+  });
+  // usersCollection.update({name:'jafi'},{name:'jafii'},(err,raw)=>{
+  //   console.log( 'err',err );
+  //   console.log( 'raw',raw );
+  // });
+});
+
+router.delete('/register/',(req,res)=>{
+  // var newUser=new userRegisterCollection({
+  //   name: req.body.name,
+  //   password: req.body.password,
+  //   email: req.body.email
+  // });
+  var newUser=new userRegisterCollection(_.pick(req.body,['name','password','email']));
+  newUser.save().then(data=>{
+      res.send(_.pick(data,['name','email','password','date']));
+  }).catch(err=>{
+    res.status(400).send(err);
+  });
+  
+});
+
+
+router.post('/search/',(req,res)=>{
   userRegisterCollection.find({'name':req.query.name})
   .then(data=>{
     if(data.length>0){
@@ -106,24 +156,5 @@ router.get('/register/',(req,res)=>{
 });
 
 
-
-
-//find id
-router.post('/', function(req, res) {
-  usersCollection.findOne({'name':req.body.name},{_id:false})
-  .then(data=>{
-    console.log( typeof(data) );
-    if(data){
-      console.log( _.pick(data,['name','email','password']) );
-      res.send(data);
-    }else{
-      res.status(400).send('not found!!')
-    }
-  });
-  // usersCollection.update({name:'jafi'},{name:'jafii'},(err,raw)=>{
-  //   console.log( 'err',err );
-  //   console.log( 'raw',raw );
-  // });
-});
 
 module.exports = router;

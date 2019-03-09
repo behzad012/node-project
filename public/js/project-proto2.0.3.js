@@ -445,5 +445,3 @@ function modalImg(){
 
 
 
-
-
