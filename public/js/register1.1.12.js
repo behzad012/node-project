@@ -21,7 +21,8 @@ function registerForm(e){
         password: $( '#txtRegister2' ).val().trim(),
         email: $( '#txtRegister3' ).val().toLowerCase().trim()
       },
-      timeout: 10000
+      timeout: 10000,
+      cache: false
     };
     $.ajax(settings).done(function(data){
       $( '#registerinfo' ).css('opacity','1');
@@ -80,7 +81,8 @@ function registerForm(e){
       data: {
         email: $( '#txtupdate' ).val().toLowerCase().trim()
       },
-      timeout: 10000
+      timeout: 10000,
+      cache: false
     };
     $.ajax(settings).done(function(data){
       $( '#searchinfo' ).css('opacity','1');
@@ -115,7 +117,8 @@ function registerForm(e){
         password: $( '#txtupdate1' ).val().trim(),
         email: $( '#txtupdate2' ).val().toLowerCase().trim()
       },
-      timeout: 10000
+      timeout: 10000,
+      cache: false
     };
     $.ajax(settings).done(function(data){
       $( '#updateinfo' ).css('display','block');
@@ -153,7 +156,8 @@ function registerForm(e){
       data: {
         email: $( '#txtsearch' ).val().toLowerCase().trim()
       },
-      timeout: 10000
+      timeout: 10000,
+      cache: false
     };
     $.ajax(settings).done(function(data){
       $( '#searchResult' ).css('opacity','1');
@@ -182,7 +186,8 @@ function registerForm(e){
       data: {
         email: $( '#txtdelete' ).val().toLowerCase().trim()
       },
-      timeout: 10000
+      timeout: 10000,
+      cache: false
     };
     $.ajax(settings).done(function(data){
       $( '#deleteResult' ).css('opacity','1');
@@ -195,3 +200,4 @@ function registerForm(e){
 
 
   
+
