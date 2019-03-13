@@ -36,17 +36,17 @@ function registerForm(e){
         $( 'div#registerinfo' ).html(JSON.stringify(data));
       }
     }).fail(function(err){
-        $( '#registerinfo' ).css('opacity','1');
-        var $table=$( '<table class="table table-striped"/>' ).append($('<tbody/>'));
-        $.each(err,function(i,value){
-          if (typeof(value)=='object') {
-            $.each(value.errors,function(i,v){
-              $table.append( $( '<tr/>' ).append('<td>'+v.message+'</td>') )
-            });
-          }
+      $( '#registerinfo' ).css('opacity','1');
+      var $table=$( '<table class="table table-striped"/>' ).append($('<tbody/>'));
+      if(err.status==422){
+        $.each(JSON.parse(err.responseText).errors,function(i,value){
+          $table.append( $( '<tr/>' ).append('<td>'+value.msg+'</td>') )
         });
-        $( 'div#registerinfo' ).html( '<h3 class="text-danger">خطا </h3>' ).append($table);
-      });
+      }else if(err.status==400){
+        $table.append( $( '<tr/>' ).append('<td>'+JSON.parse(err.responseText).errors.email.message+'</td>') )
+      }
+      $( 'div#registerinfo' ).html( '<h3 class="text-danger">خطا </h3>' ).append($table);;
+    });
   }
   
   
