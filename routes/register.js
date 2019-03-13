@@ -77,8 +77,9 @@ var usersCollection = mongoose.model('users',userRegisterSchema,'users');
 
 router.post('/register/',[
   check('name','نام نمی تواند خالی باشد').isLength({min:3}),
-  check('password','پسورد حداقل 5 کاراکتر باید باشد').isLength({ min: 5 }),
-  check('email','آدرس ایمیل نامعتبر است').isEmail()
+  check('password','کلمه عبور  حداقل 5 کاراکتر باید باشد').isLength({ min: 5 }),
+  check('email').isEmail().withMessage('آدرس ایمیل نامعتبر است').isLength({min:1}).withMessage('آدرس ایمیل  نمی تواند خالی باشد'),
+  check('passwordConfirmation').custom( (value,{req})=>value==req.body.password ).withMessage('کلمه عبور مطابقت ندارد').isLength({min:5}).withMessage('تکرار کلمه عبور  حداقل 5 کاراکتر باید باشد')
 ],(req,res)=>{
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

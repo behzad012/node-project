@@ -19,7 +19,8 @@ function registerForm(e){
       data: {
         name: $( '#txtRegister1' ).val().toLowerCase().trim(),
         password: $( '#txtRegister2' ).val().trim(),
-        email: $( '#txtRegister3' ).val().toLowerCase().trim()
+        passwordConfirmation: $( '#txtRegister3' ).val().trim(),
+        email: $( '#txtRegister4' ).val().toLowerCase().trim()
       },
       timeout: 10000,
       cache: false
