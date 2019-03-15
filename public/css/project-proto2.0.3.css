@@ -13,7 +13,7 @@ html{direction: rtl; font-family: 'IRANSansWeb',tahoma,arial;}
 	-ms-user-select: none;
 	user-select: none;
 }
-body{text-align: right; font-family: 'IRANSansWeb',tahoma,arial;}
+body{text-align: right; font-family: 'IRANSansWeb',tahoma,arial; direction: inherit;}
 .ltr{
 	direction: ltr;
 }

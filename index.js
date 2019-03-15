@@ -15,6 +15,7 @@ const routerUsers = require('./routes/users.js');
 const notFound = require('./routes/notFound.js');
 const routerGetPhotos = require('./routes/getphotos.js');
 const routerpages = require('./routes/pages.js');
+const routerhome = require('./routes/home.js');
 
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname, 'views'));
@@ -30,11 +31,10 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname,'/public')));
 
 
-
+app.use('/',routerhome);
 app.use('/api/', routerRegister);
 app.use('/api/getphotos/', routerGetPhotos);
 app.use('/pages/', routerpages);
-// app.use('/pages/infinite-scroll/', routerinfiniteScroll);
 
 
 
