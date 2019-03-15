@@ -1,67 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>photo api</title>
-    <link rel="shortcut icon" type="image/png" href="../Images/myproject.png"/>
+<%- include('../layouts/headLayout.ejs') %>
     <link rel="stylesheet" href="../css/bootstrap4.1.0.min.css ">
     <link rel="stylesheet" href="../css/project-proto2.0.3.css">
     <script src="../js/jquery-3.3.1.js"></script>
 </head>
-<body class="bg-info">
-    <nav class="flexmenu userSelect d-flex flex-wrap rtl" style="position: relative;">
-        <div class="flex-grow-1 mr-5 d-md-none">
-            <div class="container-icon mr-4 mt-1">
-                <div class="bar1"></div>
-                <div class="bar2"></div>
-                <div class="bar3"></div>
-            </div>
-        </div>
-        <div class="menuContainer d-md-flex flex-grow-1 userSelect">	
-            <ul id="flexmenu1" class="mymenu1 p-0 m-0 pr-md-5  d-md-flex">
-                <li class="m-0 pr-5 pr-md-0"><a class="text-white p-2 p-md-3 d-block w-100 h-100" href="../index.html#">صفحه اصلی</a></li>
-                <li class="m-0 pr-5 pr-md-0"><a class="text-white p-2 p-md-3 d-block w-100 h-100" href="../index.html#intro">معرفی محصول</a></li>
-                <li class="m-0 pr-5 pr-md-0"><a class="text-white p-2 p-md-3 d-block w-100 h-100" href="../index.html#gallery">گالری</a></li>
-                <li class="m-0 pr-5 pr-md-0"><a class="text-white p-2 p-md-3 d-block w-100 h-100" href="../index.html#specscroll">مشخصات</a></li>
-                <li class="m-0 pr-5 pr-md-0"><a class="text-white p-2 p-md-3 d-block w-100 h-100" href="../index.html#contact">ارتباط با ما</a></li>
-                <li class="m-0 pr-5 pr-md-0"><a class="text-white p-2 p-md-3 d-block w-100 h-100" href=""> سایر </a>
-                    <ul class="" style="background: #107180;">
-                        <li><a class="text-white" href="../pages/register.html">CRUD op</a></li>
-                        <li><a class="text-white" href="#"> photo api</a></li>
-                    </ul>				
-                </li>
-            </ul>
-        </div>
-        <ul>
-            <li id="login" class="mr-auto ml-3 "><a href="#"> </a></li>
-        </ul>
-    </nav>
-
-    <div class="my-3"></div>
-    <div class="container-fluid pt-3">
-        <form class="mb-3">
+<body class="bg-info"  style="overflow-x: hidden;">
+   <%- include('../layouts/mainNav.ejs') %>
+    <br><br>
+    <div class="my-5"></div>
+    <div class="container" style="max-width: 100%;">
+        <form class="mb-3" >
             <div class="form-row align-items-center">
                 <div class="col-auto my-1">
                     <label class="text-white pt-1" for="txtGetPhoto">یک تگ وارد کنید:</label>
                 </div>
-                <div class="col-sm-6 my-1">
+                <div class="col-12 col-sm col-md-4 my-1">
                     <input type="text" class="form-control" id="txtGetPhoto" placeholder=" e.g. technology">
                 </div>
-                <div class="col-auto my-1">
-                    <button type="button" id="getPhoto" class="btn btn-outline-warning">دریافت اطلاعات</button>
+                <div class="col-12 col-md-auto my-1">
+                    <button type="button" id="getPhoto" class="col-12 btn btn-outline-warning">دریافت اطلاعات</button>
                 </div>
             </div>
         </form>
-        <div id="photoResult" class="col-12 d-flex flex-wrap">
+        <div id="error" class="w-100"></div>
+        <div id="photoWrapper" class="">
+            <div id="photoResult" class="w-100 d-flex flex-wrap"></div>
         </div>
-
     </div>
+
+    <div id="load" class="load">
+        <div class="position-relative load-size" >
+            <div id="spinner1" class="lds-spinner" style="width:100%;height:100%"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        </div>
+    </div>
+
+    
 </body>
 <script>
     $(function(){ 
+
         $( '#getPhoto' ).click(function(){
+            divflag=true;
             getPhotos(1);
         });
         $('.container-icon').on('click',function(){
@@ -73,11 +51,24 @@
                 $('.container-icon').click();
             }
         });
+        $('form').keypress(function(e) { 
+            return e.keyCode != 13;
+        }); 
+        $( '#txtGetPhoto' ).on("keyup",function(e) {
+            if (e.keyCode === 13) {
+                divflag=true;
+                getPhotos(1);
+            }
+        });
     });
     var page=0;
     function getPhotos(p=null){
-        console.log( 'enter',flag );
-        
+        if(divflag){
+            $( '#photoResult' ).css('opacity','.2');
+            $( '#error' ).css('opacity','.2');
+            // $( '#load' ).css('display','block');
+            $( '#load' ).show();       
+        }
         if(p!=null){
             page=p;
         }else{
@@ -97,35 +88,68 @@
             timeout: 20000
         };
         $.ajax(settings).done(function(data){
-            flag=!flag;
-            $.each(data,function(i,value){
-                if(typeof(value)==='object'){
-                    $.each(value,function(i,v){
-                        $( '#photoResult' ).append
-                         ( $( '<img src="'+v.urls.regular+'" alt="" class="col-sm-6 col-md-4 col-lg-3 mb-2 img-fluid px-4 px-sm-1" style="height:300px;overflow:hidden;object-fit:cover;border-radius: 0.4rem;">' ) );
-                    });
+            $( '#photoResult' ).css('opacity','1');
+            // $( '#spinner' ).css('display','none'); 
+            $( '#load' ).hide(); 
+            if(data.total){
+                $( '#error' ).html('');
+                if(divflag){
+                    $( '#photoResult' ).html('');
+                    $('#photoWrapper').height($(window).height());
+                    divflag=!divflag;
                 }
-            //   $( '#photoResult' ).append
-            //     ( $( '<img src="'+value+'" alt="" class="col-sm-6 col-md-4 mb-2 img-fluid px-4 px-sm-1" style="height:300px;overflow:hidden;object-fit:cover;border-radius: 0.4rem;">' ) );
-            });
+                setTimeout(() => {
+                    flag=true;
+                }, 4000);
+                $.each(data,function(i,value){
+                    if(typeof(value)==='object'){
+                        $.each(value,function(i,v){
+                            $( '#photoResult' ).append
+                            ( $( '<img src="'+v.urls.regular+'" alt="" class="col-sm-6 col-md-4 col-lg-3 mb-2 img-fluid px-4 px-sm-1" style="height:300px;overflow:hidden;object-fit:cover;border-radius: 0.4rem;">' ) );
+                        });
+                    }
+                //   $( '#photoResult' ).append
+                //     ( $( '<img src="'+value+'" alt="" class="col-sm-6 col-md-4 mb-2 img-fluid px-4 px-sm-1" style="height:300px;overflow:hidden;object-fit:cover;border-radius: 0.4rem;">' ) );
+                });
+            }else{
+                flag=true;
+                if(divflag){
+                    $( '#photoResult' ).html('');
+                    $('#photoWrapper').height($(window).height());
+                    divflag=!divflag;
+                }
+                $( '#error' ).css('opacity','1');
+                // $( '#error' ).animate({
+                //     opacity: '1'
+                // },200);
+                $( '#error' ).html('<h1>not found</h1>');
+            }
+                
         }).fail(function(err){
+            // $( '#load' ).css('display','none'); 
+            $( '#load' ).hide();    
+            if(divflag){
+                    $('#photoWrapper').height($(window).height());
+                    divflag=!divflag;
+                }
+            $( '#photoResult' ).css('opacity','1');
             console.log( 'err: ',err );
-            $( '#photoResult' ).append( $( '<p/>' ).append(err.responseText) )
+            $( '#photoResult' ).html( $( '<p/>' ).append(err.responseText) )
         });
     }
     var flag=false;
+    var divflag;
     var $wHeight=$(window).height();
     var $dHeight=$(document).height();
     $(window).scroll(function() {
-        console.log( '23232323' );
         var $scrollTop = $(this).scrollTop();
         var $height=$(window).scrollTop()+$wHeight+10;
         var $dHeight=$(document).height();
         if($height >= $dHeight) {
-            console.log( 'height high',flag );
             if(flag){
                 flag=!flag;
                 getPhotos();
+                $('#photoWrapper').height($dHeight+300);
             }
         }
     });

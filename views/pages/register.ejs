@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" type="image/png" href="../Images/myproject.png"/>
-    <title>Document</title>
+<%- include('../layouts/headLayout.ejs') %>
     <link rel="stylesheet" href="../css/bootstrap4.1.0.min.css ">
     <link rel="stylesheet" href="../css/project-proto2.0.3.css">
     <script src="../js/jquery-3.3.1.js"></script>
@@ -70,12 +62,19 @@
 
     <div class="my-5"></div>
 
-    <div class="container-fluid pr-5 py-2  bg-info mb-4">
-            <button id="btnnum1" class="btn btn-outline-warning px-2 m-2 control" style="border-radius:20px;font-size: 18px;width:100px;box-shadow: none;"> ثبت نام </button>
-            <button id="btnnum2" class="btn btn-outline-warning px-2 m-2 control" style="border-radius:20px;font-size: 18px;width:100px;box-shadow: none;"> بروزرسانی </button>
-            <button id="btnnum3" class="btn btn-outline-warning px-2 m-2 control" style="border-radius:20px;font-size: 18px;width:100px;box-shadow: none;"> جستجو </button>
-            <button id="btnnum4" class="btn btn-outline-warning px-2 m-2 control" style="border-radius:20px;font-size: 18px;width:100px;box-shadow: none;"> حذف  </button>
-    </div>
+    <div class="container-fluid pr-5 py-2  bg-info mb-4 d-flex flex-wrap justify-content-between">
+            <div class="col">
+                <button id="btnnum1" class="btn btn-outline-warning px-2 m-2 control" style="border-radius:20px;font-size: 18px;width:100px;box-shadow: none;"> ثبت نام </button>
+                <button id="btnnum2" class="btn btn-outline-warning px-2 m-2 control" style="border-radius:20px;font-size: 18px;width:100px;box-shadow: none;"> بروزرسانی </button>
+                <button id="btnnum3" class="btn btn-outline-warning px-2 m-2 control" style="border-radius:20px;font-size: 18px;width:100px;box-shadow: none;"> جستجو </button>
+                <button id="btnnum4" class="btn btn-outline-warning px-2 m-2 control" style="border-radius:20px;font-size: 18px;width:100px;box-shadow: none;"> حذف  </button>
+            </div>
+            <div>
+                <button id="btnnum4" class="btn btn-outline-warning px-2 m-2" style="border-radius:18px;font-size: 16px;width:100px;box-shadow: none;">
+                    <a class="d-block w-100 h-100"  href="/#">صفحه اصلی</a>
+                </button>
+            </div>
+        </div>
      
 <!-- register -->
 <div class="select mb-5" id="register">

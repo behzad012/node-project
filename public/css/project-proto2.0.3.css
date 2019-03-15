@@ -61,15 +61,16 @@ ol, ul {
 	right: 0;border-radius: 5px 0 0 5px;
 }
 
-nav.flexmenu{padding: 5px 0px 0px 0px;  position: absolute;top: 0; background-color:rgba(0,0,0,.3);color:white; width: 100vw;z-index: 99;}
+nav.flexmenu{padding: 5px 0px 0px 0px;  position: absolute;top: 0; background-color:#107180;color:white; width: 100vw;z-index: 99;}
 nav.flexmenu>ul{display: flex; position: relative;margin: 0px;list-style: none;}
 
 nav.flexmenu ul li a{padding: 10px 15px; color: white;  display:block; width: 110px; }
 nav.flexmenu>ul>li>a{width: auto; padding: 10px 15px 15px;border-radius: 5px;font-size: 1.07em;display: block;color: white;}
 /* nav.flexmenu ul li a:hover{text-shadow: -4px 4px 8px black; } */
 nav.flexmenu ul li:hover{background-color: rgba(0,0,0,0.2);border-radius: 5px;}
-nav.flexmenu ul ul{display: none;margin: 0; padding: 0;}
-nav.flexmenu ul>li:hover>ul{display: block;position: absolute; background-color:rgba(0,0,0,.5); top:100%;}
+nav.flexmenu ul ul{display: none;margin: 0; padding: 0; background-color:#107180;position: absolute;}
+nav.flexmenu ul>li:hover>ul{display: block; top:100%; }
+
 
 .cover{
 	object-fit: cover;
@@ -263,6 +264,15 @@ ul#specsid li:hover{
 		display: block;
 		width: 100%;
 	}
+	nav.flexmenu ul>li:hover>ul{
+		display: block;
+		right: 0;
+		width: 100vw;
+		margin: 0;
+	}
+	nav.flexmenu ul>li:hover>ul>li{
+		padding-right: 50px;
+	}
 }
 @media (min-width: 768px) {
 	.d-none-md{
@@ -283,3 +293,122 @@ ul#specsid li:hover{
 .cursor-pointer{
 	cursor: pointer;
 }
+
+
+
+.load{
+	position: absolute;top: 0; right: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, .7); z-index: 1;display: none;
+}
+.load-size{
+	width:200px;height:200px;top:calc(50vh - 100px);; right: calc(50vw - 100px);
+}
+@keyframes lds-spinner {
+	0% {
+	  opacity: 1;
+	}
+	100% {
+	  opacity: 0;
+	}
+  }
+  @-webkit-keyframes lds-spinner {
+	0% {
+	  opacity: 1;
+	}
+	100% {
+	  opacity: 0;
+	}
+  }
+  .lds-spinner {
+	position: relative;
+  }
+  .lds-spinner div {
+	left: 94px;
+	top: 48px;
+	position: absolute;
+	-webkit-animation: lds-spinner linear 1.3s infinite;
+	animation: lds-spinner linear 1.3s infinite;
+	background: #51CACC;
+	width: 12px;
+	height: 24px;
+	border-radius: 40%;
+	-webkit-transform-origin: 6px 52px;
+	transform-origin: 6px 52px;
+  }
+  .lds-spinner div:nth-child(1) {
+	-webkit-transform: rotate(0deg);
+	transform: rotate(0deg);
+	-webkit-animation-delay: -1.191666666666667s;
+	animation-delay: -1.191666666666667s;
+  }
+  .lds-spinner div:nth-child(2) {
+	-webkit-transform: rotate(30deg);
+	transform: rotate(30deg);
+	-webkit-animation-delay: -1.083333333333333s;
+	animation-delay: -1.083333333333333s;
+  }
+  .lds-spinner div:nth-child(3) {
+	-webkit-transform: rotate(60deg);
+	transform: rotate(60deg);
+	-webkit-animation-delay: -0.975s;
+	animation-delay: -0.975s;
+  }
+  .lds-spinner div:nth-child(4) {
+	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+	-webkit-animation-delay: -0.866666666666667s;
+	animation-delay: -0.866666666666667s;
+  }
+  .lds-spinner div:nth-child(5) {
+	-webkit-transform: rotate(120deg);
+	transform: rotate(120deg);
+	-webkit-animation-delay: -0.758333333333333s;
+	animation-delay: -0.758333333333333s;
+  }
+  .lds-spinner div:nth-child(6) {
+	-webkit-transform: rotate(150deg);
+	transform: rotate(150deg);
+	-webkit-animation-delay: -0.65s;
+	animation-delay: -0.65s;
+  }
+  .lds-spinner div:nth-child(7) {
+	-webkit-transform: rotate(180deg);
+	transform: rotate(180deg);
+	-webkit-animation-delay: -0.541666666666667s;
+	animation-delay: -0.541666666666667s;
+  }
+  .lds-spinner div:nth-child(8) {
+	-webkit-transform: rotate(210deg);
+	transform: rotate(210deg);
+	-webkit-animation-delay: -0.433333333333333s;
+	animation-delay: -0.433333333333333s;
+  }
+  .lds-spinner div:nth-child(9) {
+	-webkit-transform: rotate(240deg);
+	transform: rotate(240deg);
+	-webkit-animation-delay: -0.325s;
+	animation-delay: -0.325s;
+  }
+  .lds-spinner div:nth-child(10) {
+	-webkit-transform: rotate(270deg);
+	transform: rotate(270deg);
+	-webkit-animation-delay: -0.216666666666667s;
+	animation-delay: -0.216666666666667s;
+  }
+  .lds-spinner div:nth-child(11) {
+	-webkit-transform: rotate(300deg);
+	transform: rotate(300deg);
+	-webkit-animation-delay: -0.108333333333333s;
+	animation-delay: -0.108333333333333s;
+  }
+  .lds-spinner div:nth-child(12) {
+	-webkit-transform: rotate(330deg);
+	transform: rotate(330deg);
+	-webkit-animation-delay: 0s;
+	animation-delay: 0s;
+  }
+  .lds-spinner {
+	width: 200px !important;
+	height:200px !important;
+	-webkit-transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+	transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+	}
