@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
+    "ejs": "^2.6.1",
     "es6-promise": "^4.2.6",
     "express": "^4.16.4",
     "express-validator": "^5.3.1",
