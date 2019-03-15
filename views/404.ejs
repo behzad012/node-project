@@ -1,23 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title> <%= pageTitle %> </title>
-        <link rel="shortcut icon" type="image/png" href="/Images/myproject.png"/>
+<%- include('layouts/headLayout.ejs') %>
         <link rel="stylesheet" href="/css/bootstrap4.1.0.min.css ">
         <link rel="stylesheet" href="/css/project-proto2.0.3.css"> 
         <!-- <script src="/js/jquery-3.3.1.js"></script> -->
 </head>
-<body class="bg-info" style="direction: rtl;">
-    <div class="container">
-        <h1 class="col-12 text-center userSelect" style="margin-top:20vh; color: #cd2c29;font-size: 200px;font-family: 'Times New Roman', Times,Arial, serif; font-weight: 700;">
-            4 <span style="color:#333333; margin: 0;">0</span> 4</h1>
-        <h2 class="text-center mb-4 userSelect text-warning" style="">متاسفانه صفحه مورد نظر شما یافت نشد !</h2>
-        <div class="col-12 text-center">
-            <a class="btn btn-warning px-5 py-2 " href="/#" style="font-size: 20px;">صفحه اصلی</a>
-        </div>
+<body class="bg-info">
+<div class="container">
+    <h1 class="col-12 text-center userSelect" style="margin-top:20vh; color: #cd2c29;font-size: 200px;font-family: 'Times New Roman', Times,Arial, serif; font-weight: 700;">
+        4 <span style="color:#333333; margin: 0;">0</span> 4</h1>
+    <h2 class="text-center mb-4 userSelect text-warning" style="">متاسفانه صفحه مورد نظر شما یافت نشد !</h2>
+    <div class="col-12 text-center">
+        <a class="btn btn-warning px-5 py-2 " href="/#" style="font-size: 20px;">صفحه اصلی</a>
     </div>
-</body>
-</html>
+</div>
+<%- include('layouts/endLayout.ejs') %>
