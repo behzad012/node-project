@@ -14,8 +14,7 @@ const routerRegister = require('./routes/register.js');
 const routerUsers = require('./routes/users.js');
 const notFound = require('./routes/notFound.js');
 const routerGetPhotos = require('./routes/getphotos.js');
-const routerRegisterpage = require('./routes/registerPage');
-const routerinfiniteScroll = require('./routes/infinite-scroll');
+const routerpages = require('./routes/pages.js');
 
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname, 'views'));
@@ -33,9 +32,9 @@ app.use(express.static(path.join(__dirname,'/public')));
 
 
 app.use('/api/', routerRegister);
-app.use('/api/getphotos', routerGetPhotos);
-app.use('/pages/register', routerRegisterpage);
-app.use('/pages/infinite-scroll', routerinfiniteScroll);
+app.use('/api/getphotos/', routerGetPhotos);
+app.use('/pages/', routerpages);
+// app.use('/pages/infinite-scroll/', routerinfiniteScroll);
 
 
 
