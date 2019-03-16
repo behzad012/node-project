@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /*jshint esversion: 6 */ 
 
 const express = require('express');
@@ -10,12 +11,11 @@ const mongooseUnique = require('mongoose-unique-validator');
 
 
 // routes
-const routerRegister = require('./routes/register.js');
-const routerUsers = require('./routes/users.js');
-const notFound = require('./routes/notFound.js');
-const routerGetPhotos = require('./routes/getphotos.js');
-const routerpages = require('./routes/pages.js');
-const routerhome = require('./routes/home.js');
+const routerRegister = require('./routes/register');
+const notFound = require('./routes/errors');
+const routerGetPhotos = require('./routes/getphotos');
+const routerpages = require('./routes/pages');
+const routerhome = require('./routes/home');
 
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname, 'views'));

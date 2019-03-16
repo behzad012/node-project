@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const pagesControllers = require('../controllers/pages');
+const pagesController = require('../controllers/pages');
 
 // router.get('/register/',(req,res)=>{
 //     // res.status(404).render('404', { locals: { pageTitle: 'صفحه  پیدا نشد!', flag: true, notfound: true, styleproto: true} });
@@ -9,8 +9,8 @@ const pagesControllers = require('../controllers/pages');
 //     });
 // });
 
-router.get('/register/', pagesControllers.register);
-router.get('/infinite-scroll/', pagesControllers.infinite_scroll);
+router.get('/register/', pagesController.register);
+router.get('/infinite-scroll/', pagesController.infinite_scroll);
 
 
 
