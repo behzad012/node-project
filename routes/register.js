@@ -1,47 +1,9 @@
-var express = require('express');
-var router = express.Router();
-const mongoose = require('mongoose');
-const mongooseUnique = require('mongoose-unique-validator');
+const express = require('express');
+const router = express.Router();
+const usersCollection = require('../models/usersCollection');
 const _ = require('lodash');
 const { check, validationResult } = require('express-validator/check');
 
-var userRegisterSchema = new mongoose.Schema({
-  name:  {
-    type:String,
-    required:true,
-    index: true,
-    required: true
-  },
-  password:  {
-    type:String,
-    required: true
-  },
-  created_at: {
-    type: Date, 
-    default: Date.now
-  },
-  updated_at: {
-    type: Date, 
-    default: Date.now
-  },
-  email: {
-    type: String,
-    lowercase: true,
-    unique: true,
-    index: true,
-    required: true
-  },
-  tags: [String]
-}); 
-
-
-userRegisterSchema.plugin(mongooseUnique,{message:'آدرس ایمیل تکراری است'});
-var usersCollection = mongoose.model('users',userRegisterSchema,'users');
-
-// userRegisterCollection.find({'name':'jafi'}).then(data=>{
-//   console.log( data );
-//   res.send(data);
-// });
 
 // router.route('/')
 // .post((req,res)=>{
@@ -86,7 +48,7 @@ router.post('/register/',[
     return res.status(422).json({ errors: errors.array() });
   }else{
     console.log( 'else' );    
-    var newUser=new usersCollection(_.pick(req.body,['name','password','email']));
+    let newUser=new usersCollection(_.pick(req.body,['name','password','email']));
     newUser.save().then(data=>{
         res.send(_.pick(data,['name','password','email','date','created_at','updated_at']));
     }).catch(err=>{
@@ -101,7 +63,7 @@ router.get('/register/',(req,res)=>{
   usersCollection.findOne({'email':req.query.email},{_id:false})
   .then(data=>{
     if(data){
-      var items= _.pick(data,['name','password','email']);
+      let items= _.pick(data,['name','password','email']);
       res.send( Object.values(items) );
     }else{
       res.status(400).send('not found!!')

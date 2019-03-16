@@ -2,7 +2,7 @@
 /*jshint esversion: 6 */ 
 
 const express = require('express');
-var app = express();
+const app = express();
 const port = process.env.PORT || 80;
 const path = require('path');
 const mongoose = require('mongoose');
